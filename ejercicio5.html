@@ -8,6 +8,15 @@
         pincel.fill();
     }
 
+    function dibujarFlor(x, y) {
+        dibujarCirculo(x, y, 25, "red");
+
+        dibujarCirculo(x + 50, y, 25, "black");
+        dibujarCirculo(x - 50, y, 25, "orange");
+        dibujarCirculo(x, y - 50, 25, "yellow");
+        dibujarCirculo(x, y + 50, 25, "blue");
+    }
+
     const $pantalla = document.querySelector("canvas");
     const pincel = $pantalla.getContext("2d");
 
@@ -16,12 +25,6 @@
     pincel.fillRect(0, 0, 600, 400);
 
     //crea flor
-    dibujarCirculo(300, 200, 25, "red");
-
-    dibujarCirculo(350, 200, 25, "black");
-    dibujarCirculo(250, 200, 25, "orange");
-
-    dibujarCirculo(300, 150, 25, "yellow");
-    dibujarCirculo(300, 250, 25, "blue");
+    dibujarFlor(300, 200);
 
 </script>
