@@ -1,0 +1,35 @@
+<meta charset="UTF-8">
+<canvas width="600" height="400"></canvas>
+
+<script>
+    const $pantalla = document.querySelector("canvas");
+    let pincel = $pantalla.getContext("2d");
+
+    //crea fondo gris
+    pincel.fillStyle = "lightgrey";
+    //pasa la coordenada del 1er punto en plano, más desplazamiento
+    pincel.fillRect(0, 0, 600, 400);
+
+    //crea columnas
+    pincel.fillStyle = "green";
+    pincel.fillRect(0, 0, 200, 400);
+
+    pincel.fillStyle = "red";
+    pincel.fillRect(400, 0, 200, 400);
+
+    //crea triángulo
+    pincel.fillStyle = "yellow";
+    pincel.beginPath();
+    //pasa parámetros de x e y en el plano, la coordenada
+    pincel.moveTo(300, 200);
+    pincel.lineTo(200, 400);
+    pincel.lineTo(400, 400);
+    pincel.fill();
+
+    //crea círculo
+    pincel.fillStyle = "blue";
+    pincel.beginPath();
+    pincel.arc(300, 200,50,0,2*3.14)   //xInicial, yInicial, tamaño en radio, ° inicial, ° final. 
+    pincel.fill();
+
+</script>
