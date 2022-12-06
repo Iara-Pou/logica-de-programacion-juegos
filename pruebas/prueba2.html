@@ -1,0 +1,12 @@
+<meta charset="utf-8">
+<canvas width="600" height="400"></canvas>
+
+<script src="../funcionesCompartidas.js"></script>
+<script>
+    const $pantalla = document.querySelector("canvas");
+    const pincel = $pantalla.getContext("2d");
+
+    dibujarCuadrado("red", "black", 0, 0);
+    dibujarCuadrado("yellow", "black", 0, 50);
+    dibujarCuadrado("green", "black", 0, 100);
+</script>
