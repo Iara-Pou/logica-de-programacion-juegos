@@ -1,0 +1,36 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+    function diseniarCirculo(x, y, radio) {
+        pincel.beginPath();
+        pincel.fillStyle = "white";
+        pincel.arc(x, y, radio, 0, 2 * Math.PI);
+        pincel.fill();
+
+    }
+
+    function crearFondo() {
+        pincel.fillStyle = "lightgrey";
+        pincel.fillRect(0, 0, 600, 400);
+    }
+
+    const $pantalla = document.querySelector("canvas");
+    const pincel = $pantalla.getContext("2d");
+    const ANCHO_PANTALLA = $pantalla.width;
+
+    crearFondo();
+
+    for (let posicionX = 0; posicionX < ANCHO_PANTALLA; posicionX++) {
+        setTimeout(() => {
+
+            setTimeout(() => {
+                crearFondo();
+                diseniarCirculo(posicionX, 20, 50);
+            }, 800
+            )
+
+        }, 100)
+
+    }
+
+</script>
