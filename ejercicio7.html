@@ -1,0 +1,30 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    function manejarClick(evento) {
+        const x = evento.pageX - $pantalla.offsetLeft;
+        const y = evento.pageY - $pantalla.offsetTop;
+        alert(`Hiciste click en ${x}, ${y}`);
+    }
+
+    function dibujarCirculo(evento){
+        const clickX = evento.pageX - $pantalla.offsetLeft;
+        const clickY = evento.pageY - $pantalla.offsetTop;
+
+        pincel.beginPath();
+        pincel.arc(clickX,clickY,50,0,2*3.14);
+        pincel.strokeStyle = "white";
+        pincel.stroke();
+
+        console.log(clickX,clickY);
+    }
+    
+    const $pantalla = document.querySelector("canvas");
+    const pincel = $pantalla.getContext("2d");
+
+    pincel.fillStyle = "gray";
+    pincel.fillRect(0, 0, 600, 400);
+    $pantalla.onclick = dibujarCirculo;
+
+</script>
