@@ -1,0 +1,60 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+    function crearCirculo(x, y, radio, color) {
+        pincel.beginPath();
+        pincel.fillStyle = color;
+        pincel.arc(x, y, radio, 0, 2 * Math.PI);
+        pincel.fill();
+    }
+
+    function crearObjetivo(x, y) {
+        crearCirculo(x, y, radio * 2 + 10, "red");
+        crearCirculo(x, y, radio * 2, "white");
+        crearCirculo(x, y, radio, "red");
+    }
+
+    function limpiarFondo() {
+        pincel.clearRect(0, 0, 600, 400)
+    }
+
+    function sortearNumero(maximo) {
+        return Math.random() * maximo;
+    }
+
+    function actualizarPantalla() {
+        limpiarFondo();
+        Xaleatorio = sortearNumero($pantalla.width) - $pantalla.offsetLeft;
+        Yaleatorio = sortearNumero($pantalla.height) - $pantalla.offsetTop;
+
+        crearObjetivo(Xaleatorio, Yaleatorio);
+    }
+
+    function disparar(evento) {
+        const x = evento.pageX - $pantalla.offsetLeft;
+        const y = evento.pageY - $pantalla.offsetTop;
+
+        if ((x >= Xaleatorio - radio && x <= Xaleatorio + radio) &&
+            (y >= Yaleatorio - radio && y <= Yaleatorio + radio) ) {
+            alert("Acertáste")
+        }
+
+    }
+
+
+    const $pantalla = document.querySelector("canvas");
+    const pincel = $pantalla.getContext("2d");
+
+    const TIEMPO_TARGET_DISPONIBLE = 1000;
+    let radio = 15;
+    let Xaleatorio;
+    let Yaleatorio;
+
+    $pantalla.onclick = disparar;
+
+    setInterval(() => {
+        actualizarPantalla();
+    }, TIEMPO_TARGET_DISPONIBLE);
+
+
+</script>
