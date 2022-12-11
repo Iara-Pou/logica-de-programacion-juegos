@@ -1,0 +1,92 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+    function dibujarCirculo(evento) {
+        const cursorEstaEnColores = avisarSiCursorEnColores(evento);
+        if (puedoDibujar && !cursorEstaEnColores) {
+            var x = evento.pageX - $pantalla.offsetLeft;
+            var y = evento.pageY - $pantalla.offsetTop;
+            pincel.fillStyle = colorPincel;
+            pincel.beginPath();
+            pincel.arc(x, y, 5, 0, 2 * 3.14);
+            pincel.fill();
+        }
+    }
+
+    function avisarSiCursorEnColores(evento){
+        const xApretada = evento.pageX - $pantalla.offsetLeft;
+        const yApretada = evento.pageY - $pantalla.offsetTop;
+        return (yApretada > 0 && yApretada < 40) && (xApretada > 0 && xApretada < 120);
+    }
+
+    function habilitarDibujar() {
+        puedoDibujar = true;
+    }
+
+    function deshabilitarDibujar() {
+        puedoDibujar = false;
+    }
+
+    function mostrarCuadrado(x, y, tamaño, color) {
+        pincel.fillStyle = color;
+        pincel.fillRect(x, y, tamaño, tamaño);
+    }
+
+    function mostrarColoresDisponibles() {
+        let xInicial = 0;
+        const yInicial = 0;
+        const tamañoCuadrado = 40;
+
+        for (let cuadrado = 0; cuadrado < colores.length; cuadrado++) {
+            mostrarCuadrado(xInicial, yInicial, tamañoCuadrado, colores[cuadrado]);
+            xInicial += tamañoCuadrado;
+        }
+    }
+
+    function inicializarLienzo() {
+        pincel.fillStyle = 'grey';
+        pincel.fillRect(0, 0, 600, 400);
+        mostrarColoresDisponibles();
+    }
+
+    function manejarClick(click) {
+        const cursorEstaEnColores = avisarSiCursorEnColores(click);
+
+        habilitarDibujar();
+        if (cursorEstaEnColores) {
+            const xApretada = click.pageX - $pantalla.offsetLeft;
+            cambiarColor(xApretada);
+        }
+
+    }
+
+    function cambiarColor(x) {
+        if (x <= 40) {
+            colorPincel = "red";
+        } else if (x <= 80) {
+            colorPincel = "green";
+        } else {
+            colorPincel = "blue";
+        }
+
+    }
+
+    const $pantalla = document.querySelector('canvas');
+    const pincel = $pantalla.getContext('2d');
+    const colores = ["red", "green", "blue"];
+    let colorPincel = "blue";
+    let puedoDibujar = false;
+
+    inicializarLienzo();
+
+    $pantalla.onmousemove = dibujarCirculo;
+    $pantalla.onmousedown = manejarClick;
+    $pantalla.onmouseup = deshabilitarDibujar;
+
+
+
+
+    //armar los cuadrados, c/u con un color diferente
+
+
+</script>
